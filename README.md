@@ -1,1 +1,1 @@
-# isometric-pathfinding
+# Minesweeper
