@@ -378,19 +378,19 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
-    	child_ctx[20] = i;
+    	child_ctx[17] = list[i];
+    	child_ctx[19] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[21] = list[i];
-    	child_ctx[23] = i;
+    	child_ctx[20] = list[i];
+    	child_ctx[22] = i;
     	return child_ctx;
     }
 
-    // (112:2) {#if state === true}
+    // (110:2) {#if state === true}
     function create_if_block_7(ctx) {
     	let h1;
     	let t1;
@@ -404,9 +404,9 @@ var app = (function () {
     			h3 = element("h3");
     			h3.textContent = "Press Enter to try again";
     			attr_dev(h1, "class", "end svelte-3jv1ug");
-    			add_location(h1, file, 112, 3, 2647);
+    			add_location(h1, file, 110, 3, 2644);
     			attr_dev(h3, "class", "end svelte-3jv1ug");
-    			add_location(h3, file, 113, 3, 2681);
+    			add_location(h3, file, 111, 3, 2678);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -424,20 +424,20 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(112:2) {#if state === true}",
+    		source: "(110:2) {#if state === true}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (135:6) {:else}
+    // (134:6) {:else}
     function create_else_block_2(ctx) {
     	let div;
 
     	function select_block_type_3(ctx, dirty) {
-    		if (/*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] === 0) return create_if_block_5;
-    		if (/*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] > 0) return create_if_block_6;
+    		if (/*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] === 0) return create_if_block_5;
+    		if (/*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] > 0) return create_if_block_6;
     		return create_else_block_3;
     	}
 
@@ -449,7 +449,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "class", "lost svelte-3jv1ug");
-    			add_location(div, file, 135, 7, 3606);
+    			add_location(div, file, 134, 7, 3573);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -478,20 +478,20 @@ var app = (function () {
     		block,
     		id: create_else_block_2.name,
     		type: "else",
-    		source: "(135:6) {:else}",
+    		source: "(134:6) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (120:6) {#if state === false}
+    // (118:6) {#if state === false}
     function create_if_block(ctx) {
     	let if_block_anchor;
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][1] === true) return create_if_block_1;
-    		if (/*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][1] === "F") return create_if_block_4;
+    		if (/*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][1] === true) return create_if_block_1;
+    		if (/*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][1] === "F") return create_if_block_4;
     		return create_else_block_1;
     	}
 
@@ -530,28 +530,28 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(120:6) {#if state === false}",
+    		source: "(118:6) {#if state === false}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (141:7) {:else}
+    // (140:7) {:else}
     function create_else_block_3(ctx) {
     	let div;
     	let mounted;
     	let dispose;
 
     	function contextmenu_handler_7() {
-    		return /*contextmenu_handler_7*/ ctx[16](/*i*/ ctx[20], /*j*/ ctx[23]);
+    		return /*contextmenu_handler_7*/ ctx[15](/*i*/ ctx[19], /*j*/ ctx[22]);
     	}
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell bomb svelte-3jv1ug");
-    			add_location(div, file, 141, 8, 3880);
+    			add_location(div, file, 140, 8, 3847);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -575,17 +575,17 @@ var app = (function () {
     		block,
     		id: create_else_block_3.name,
     		type: "else",
-    		source: "(141:7) {:else}",
+    		source: "(140:7) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (139:36) 
+    // (138:36) 
     function create_if_block_6(ctx) {
     	let div;
-    	let t_value = /*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] + "";
+    	let t_value = /*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] + "";
     	let t;
     	let mounted;
     	let dispose;
@@ -595,7 +595,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "cell num svelte-3jv1ug");
-    			add_location(div, file, 139, 8, 3780);
+    			add_location(div, file, 138, 8, 3747);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -607,7 +607,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*board*/ 2 && t_value !== (t_value = /*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] + "")) set_data_dev(t, t_value);
+    			if (dirty & /*board*/ 2 && t_value !== (t_value = /*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -620,14 +620,14 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(139:36) ",
+    		source: "(138:36) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (137:7) {#if board[i][j][0] === 0}
+    // (136:7) {#if board[i][j][0] === 0}
     function create_if_block_5(ctx) {
     	let div;
     	let mounted;
@@ -637,7 +637,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell empty  svelte-3jv1ug");
-    			add_location(div, file, 137, 8, 3671);
+    			add_location(div, file, 136, 8, 3638);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -659,39 +659,39 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(137:7) {#if board[i][j][0] === 0}",
+    		source: "(136:7) {#if board[i][j][0] === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (131:7) {:else}
+    // (129:7) {:else}
     function create_else_block_1(ctx) {
     	let div;
     	let mounted;
     	let dispose;
 
-    	function click_handler_1() {
-    		return /*click_handler_1*/ ctx[14](/*i*/ ctx[20], /*j*/ ctx[23]);
+    	function click_handler() {
+    		return /*click_handler*/ ctx[13](/*i*/ ctx[19], /*j*/ ctx[22]);
     	}
 
     	function contextmenu_handler_6() {
-    		return /*contextmenu_handler_6*/ ctx[15](/*i*/ ctx[20], /*j*/ ctx[23]);
+    		return /*contextmenu_handler_6*/ ctx[14](/*i*/ ctx[19], /*j*/ ctx[22]);
     	}
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell hidden  svelte-3jv1ug");
-    			add_location(div, file, 131, 8, 3446);
+    			add_location(div, file, 129, 8, 3411);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div, "click", click_handler_1, false, false, false),
+    					listen_dev(div, "click", click_handler, false, false, false),
     					listen_dev(div, "contextmenu", prevent_default(contextmenu_handler_6), false, true, false)
     				];
 
@@ -712,42 +712,34 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(131:7) {:else}",
+    		source: "(129:7) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (129:40) 
+    // (127:40) 
     function create_if_block_4(ctx) {
     	let div;
     	let mounted;
     	let dispose;
 
-    	function click_handler() {
-    		return /*click_handler*/ ctx[12](/*i*/ ctx[20], /*j*/ ctx[23]);
-    	}
-
     	function contextmenu_handler_5() {
-    		return /*contextmenu_handler_5*/ ctx[13](/*i*/ ctx[20], /*j*/ ctx[23]);
+    		return /*contextmenu_handler_5*/ ctx[12](/*i*/ ctx[19], /*j*/ ctx[22]);
     	}
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell flag svelte-3jv1ug");
-    			add_location(div, file, 129, 8, 3303);
+    			add_location(div, file, 127, 8, 3300);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
 
     			if (!mounted) {
-    				dispose = [
-    					listen_dev(div, "click", click_handler, false, false, false),
-    					listen_dev(div, "contextmenu", prevent_default(contextmenu_handler_5), false, true, false)
-    				];
-
+    				dispose = listen_dev(div, "contextmenu", prevent_default(contextmenu_handler_5), false, true, false);
     				mounted = true;
     			}
     		},
@@ -757,7 +749,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			mounted = false;
-    			run_all(dispose);
+    			dispose();
     		}
     	};
 
@@ -765,20 +757,20 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(129:40) ",
+    		source: "(127:40) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (121:7) {#if board[i][j][1] === true}
+    // (119:7) {#if board[i][j][1] === true}
     function create_if_block_1(ctx) {
     	let if_block_anchor;
 
     	function select_block_type_2(ctx, dirty) {
-    		if (/*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] === 0) return create_if_block_2;
-    		if (/*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] > 0) return create_if_block_3;
+    		if (/*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] === 0) return create_if_block_2;
+    		if (/*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] > 0) return create_if_block_3;
     		return create_else_block;
     	}
 
@@ -817,28 +809,28 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(121:7) {#if board[i][j][1] === true}",
+    		source: "(119:7) {#if board[i][j][1] === true}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (126:8) {:else}
+    // (124:8) {:else}
     function create_else_block(ctx) {
     	let div;
     	let mounted;
     	let dispose;
 
     	function contextmenu_handler_4() {
-    		return /*contextmenu_handler_4*/ ctx[11](/*i*/ ctx[20], /*j*/ ctx[23]);
+    		return /*contextmenu_handler_4*/ ctx[11](/*i*/ ctx[19], /*j*/ ctx[22]);
     	}
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell bomb svelte-3jv1ug");
-    			add_location(div, file, 126, 9, 3151);
+    			add_location(div, file, 124, 9, 3148);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -862,17 +854,17 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(126:8) {:else}",
+    		source: "(124:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (124:37) 
+    // (122:37) 
     function create_if_block_3(ctx) {
     	let div;
-    	let t_value = /*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] + "";
+    	let t_value = /*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] + "";
     	let t;
     	let mounted;
     	let dispose;
@@ -882,7 +874,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "cell num svelte-3jv1ug");
-    			add_location(div, file, 124, 9, 3049);
+    			add_location(div, file, 122, 9, 3046);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -894,7 +886,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*board*/ 2 && t_value !== (t_value = /*board*/ ctx[1][/*i*/ ctx[20]][/*j*/ ctx[23]][0] + "")) set_data_dev(t, t_value);
+    			if (dirty & /*board*/ 2 && t_value !== (t_value = /*board*/ ctx[1][/*i*/ ctx[19]][/*j*/ ctx[22]][0] + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -907,14 +899,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(124:37) ",
+    		source: "(122:37) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (122:8) {#if board[i][j][0] === 0}
+    // (120:8) {#if board[i][j][0] === 0}
     function create_if_block_2(ctx) {
     	let div;
     	let mounted;
@@ -924,7 +916,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell empty  svelte-3jv1ug");
-    			add_location(div, file, 122, 9, 2938);
+    			add_location(div, file, 120, 9, 2935);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -946,14 +938,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(122:8) {#if board[i][j][0] === 0}",
+    		source: "(120:8) {#if board[i][j][0] === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (119:5) {#each row as cell, j}
+    // (117:5) {#each row as cell, j}
     function create_each_block_1(ctx) {
     	let if_block_anchor;
 
@@ -997,18 +989,18 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(119:5) {#each row as cell, j}",
+    		source: "(117:5) {#each row as cell, j}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (117:3) {#each board as row, i}
+    // (115:3) {#each board as row, i}
     function create_each_block(ctx) {
     	let div;
     	let t;
-    	let each_value_1 = /*row*/ ctx[18];
+    	let each_value_1 = /*row*/ ctx[17];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -1026,7 +1018,7 @@ var app = (function () {
 
     			t = space();
     			attr_dev(div, "class", "row svelte-3jv1ug");
-    			add_location(div, file, 117, 4, 2778);
+    			add_location(div, file, 115, 4, 2775);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1039,7 +1031,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*board, hideCell, showCell, flagCell, state*/ 31) {
-    				each_value_1 = /*row*/ ctx[18];
+    				each_value_1 = /*row*/ ctx[17];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -1072,7 +1064,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(117:3) {#each board as row, i}",
+    		source: "(115:3) {#each board as row, i}",
     		ctx
     	});
 
@@ -1113,11 +1105,11 @@ var app = (function () {
     			}
 
     			attr_dev(h1, "class", "game-container svelte-3jv1ug");
-    			add_location(h1, file, 109, 1, 2537);
-    			add_location(div0, file, 115, 2, 2739);
+    			add_location(h1, file, 107, 1, 2534);
+    			add_location(div0, file, 113, 2, 2736);
     			attr_dev(div1, "class", "game-container svelte-3jv1ug");
-    			add_location(div1, file, 110, 1, 2590);
-    			add_location(main, file, 108, 0, 2528);
+    			add_location(div1, file, 108, 1, 2587);
+    			add_location(main, file, 106, 0, 2525);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1319,7 +1311,7 @@ var app = (function () {
     	}
 
     	const keydown_handler = press => {
-    		if (press.key == "Enter") {
+    		if (press.key === "Enter") {
     			newGame();
     		}
     	};
@@ -1328,15 +1320,11 @@ var app = (function () {
     		hideCell(i, j);
     	};
 
-    	const click_handler = (i, j) => {
-    		showCell(i, j);
-    	};
-
     	const contextmenu_handler_5 = (i, j) => {
     		hideCell(i, j);
     	};
 
-    	const click_handler_1 = (i, j) => {
+    	const click_handler = (i, j) => {
     		showCell(i, j);
     	};
 
@@ -1384,9 +1372,8 @@ var app = (function () {
     		contextmenu_handler_3,
     		keydown_handler,
     		contextmenu_handler_4,
-    		click_handler,
     		contextmenu_handler_5,
-    		click_handler_1,
+    		click_handler,
     		contextmenu_handler_6,
     		contextmenu_handler_7
     	];

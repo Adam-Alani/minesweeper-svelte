@@ -125,11 +125,12 @@
 									<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell bomb"></div>
 								{/if}
 							{:else if board[i][j][1] === 'F'}
-								<div on:click={()=> {showCell(i,j)}} on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell flag"></div>
+								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell flag"></div>
 							{:else}
 								<div on:click={()=> {showCell(i,j)}} on:contextmenu|preventDefault="{() => {flagCell(i,j)}}" class="cell hidden "></div>
-
 							{/if}
+
+
 						{:else}
 							<div class = "lost">
 							{#if board[i][j][0] === 0}
