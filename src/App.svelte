@@ -58,6 +58,9 @@
 	console.log(board)
 
 	function showCell(i , j) {
+		if (board[i][j][0] === -1) {
+			state = true;
+		}
 		board[i][j][1] = true;
 		if (board[i][j][0] === 0) {
 			for (let k = -1; k <= 1 ; k++) {
@@ -76,6 +79,10 @@
 
 	function hideCell(i , j) {
 		board[i][j][1] = false;
+	}
+
+	function flagCell(i , j) {
+		board[i][j][1] = 'F';
 	}
 </script>
 
@@ -99,8 +106,11 @@
 							{:else}
 								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell bomb"></div>
 							{/if}
+						{:else if board[i][j][1] === 'F'}
+							<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell flag"></div>
 						{:else}
-							<div on:click={()=> {showCell(i,j)}}   class="cell hidden "></div>
+							<div on:click={()=> {showCell(i,j)}} on:contextmenu|preventDefault="{() => {flagCell(i,j)}}" class="cell hidden "></div>
+
 						{/if}
 					{/each}
 				</div>
@@ -173,6 +183,10 @@
 
 	.hidden {
 		background-color: #cccccc;
+	}
+
+	.flag {
+		background-color: greenyellow;
 	}
 
 </style>
