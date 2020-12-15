@@ -404,9 +404,9 @@ var app = (function () {
     			h3 = element("h3");
     			h3.textContent = "Press Enter to try again";
     			attr_dev(h1, "class", "end svelte-3jv1ug");
-    			add_location(h1, file, 142, 3, 3475);
+    			add_location(h1, file, 142, 3, 3468);
     			attr_dev(h3, "class", "end svelte-3jv1ug");
-    			add_location(h3, file, 143, 3, 3509);
+    			add_location(h3, file, 143, 3, 3502);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -449,7 +449,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "class", "lost svelte-3jv1ug");
-    			add_location(div, file, 166, 7, 4434);
+    			add_location(div, file, 166, 7, 4427);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -551,7 +551,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell bomb svelte-3jv1ug");
-    			add_location(div, file, 172, 8, 4708);
+    			add_location(div, file, 172, 8, 4701);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -595,7 +595,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "cell num svelte-3jv1ug");
-    			add_location(div, file, 170, 8, 4608);
+    			add_location(div, file, 170, 8, 4601);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -637,7 +637,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell empty  svelte-3jv1ug");
-    			add_location(div, file, 168, 8, 4499);
+    			add_location(div, file, 168, 8, 4492);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -684,7 +684,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell hidden  svelte-3jv1ug");
-    			add_location(div, file, 161, 8, 4272);
+    			add_location(div, file, 161, 8, 4265);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -733,7 +733,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell flag svelte-3jv1ug");
-    			add_location(div, file, 159, 8, 4161);
+    			add_location(div, file, 159, 8, 4154);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -830,7 +830,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell bomb svelte-3jv1ug");
-    			add_location(div, file, 156, 9, 4009);
+    			add_location(div, file, 156, 9, 4002);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -878,7 +878,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "cell num svelte-3jv1ug");
-    			add_location(div, file, 154, 9, 3877);
+    			add_location(div, file, 154, 9, 3870);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -925,7 +925,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "cell empty  svelte-3jv1ug");
-    			add_location(div, file, 152, 9, 3766);
+    			add_location(div, file, 152, 9, 3759);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1027,7 +1027,7 @@ var app = (function () {
 
     			t = space();
     			attr_dev(div, "class", "row svelte-3jv1ug");
-    			add_location(div, file, 147, 4, 3606);
+    			add_location(div, file, 147, 4, 3599);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1114,11 +1114,11 @@ var app = (function () {
     			}
 
     			attr_dev(h1, "class", "game-container svelte-3jv1ug");
-    			add_location(h1, file, 139, 1, 3365);
-    			add_location(div0, file, 145, 2, 3567);
+    			add_location(h1, file, 139, 1, 3358);
+    			add_location(div0, file, 145, 2, 3560);
     			attr_dev(div1, "class", "game-container svelte-3jv1ug");
-    			add_location(div1, file, 140, 1, 3418);
-    			add_location(main, file, 138, 0, 3356);
+    			add_location(div1, file, 140, 1, 3411);
+    			add_location(main, file, 138, 0, 3349);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1313,7 +1313,7 @@ var app = (function () {
 
     				if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[row].length) {
     					if (board[nr][nc][1] !== "F") {
-    						$$invalidate(1, board[nr][nc][1] = true, board);
+    						showCell(nr, nc);
     					}
 
     					if (board[nr][nc][1] === "F" && board[nr][nc][0] !== -1) {

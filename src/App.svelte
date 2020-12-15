@@ -106,7 +106,7 @@
 				let nr = row + dy[i], nc = col + dx[i];
 				if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[row].length ) {
 					if (board[nr][nc][1] !== 'F') {
-						board[nr][nc][1] = true;
+						showCell(nr, nc);
 					}
 					if (board[nr][nc][1] === 'F' && board[nr][nc][0] !== -1) {
 						state = true;
