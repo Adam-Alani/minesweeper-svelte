@@ -1,7 +1,7 @@
 <script>
 	export let name;
 
-`
+	`
 1. Array of N*M Size -> Three Presets -> Small, Medium, Large
 2. 3 Difficulties -> Easy , Medium , Hard -> N0 of Mines increases
 3. 3  states = { empty = 0 ; bomb = 'B' ; number = 1-8 ; flag = 'F' }
@@ -12,9 +12,8 @@
 
 	/// ======== Setup ======== ///
 	let state = false;    //While true, game runs.
-
-	let board = [[]];
-	function generateBoard([n, m] , b) {
+	let board = [[]]
+	function generateBoard(board , [m, n] , b) {
 		for (let i = 0 ; i < n ; ++i) {
 			board[i] = [];
 			for (let j = 0 ; j < m ; ++j) {
@@ -32,23 +31,39 @@
 		}
 		return board;
 	}
+	board = generateBoard(board , [30,16],99);
+	let cellsClicked = [];
+	function countNeighbours(board , i , j) {
+		let c = 0;
 
+		const prevRow = board[i - 1];
+		const currentRow = board[i]
+		const nextRow = board[i + 1];
 
+		[prevRow, currentRow, nextRow].forEach(row => {
+			if (row) {
+				if (row[j - 1] === -1) c++;
+				if (row[j] === -1) c++;
+				if (row[j + 1] === -1) c++;
+			}
+		})
+		return c;
+	}
+	function update(board) {
+		return board.map((a, i) => {
+			return a.map((b, j) => {
+				return b === -1 ? b : countNeighbours(board, i, j)
+			})
+		})
+	}
+	board = update(board);
+	console.log(board)
 
 </script>
 
 <main>
-	<div class="footer">
-		<div class="buttonsRow">
-			<div class="button-wrapper" style="width: 33.3%">
-				<button on:click={generateBoard([8,8] , 10)} >Easy</button>
-			</div><div class="button-wrapper" style="width: 33.3%">
-			<button on:click={generateBoard([16,16] , 40)}>Medium</button>
-		</div><div class="button-wrapper" style="width: 33.3%">
-			<button on:click={generateBoard([30,16] , 99)}>Hard</button>
-		</div>
-		</div>
-	</div>
+	<h1>{board}</h1>
+
 	<h1 class="game-container">Shitty MineSweeper</h1>
 	<div class="game-container">
 		{#if state === true}
@@ -59,9 +74,9 @@
 				<div class="row">
 					{#each row as cell, j}
 						{#if cell === 0}
-							<div class="cell empty"></div>
+							<div class="cell empty "></div>
 						{:else if cell > 0}
-							<div class="cell num"></div>
+							<div class="cell num">{board[i][j]}</div>
 						{:else}
 							<div class="cell bomb"></div>
 						{/if}
@@ -112,18 +127,26 @@
 	.row {
 		cursor: pointer;
 		display: flex;
-		border-radius: 50px;
-		box-shadow: 2px 0px 25px 0px rgba(0,0,0,0.55);
-		-webkit-box-shadow: 2px 0px 25px 0px rgba(0,0,0,0.55);
-		-moz-box-shadow: 2px 0px 25px 0px rgba(0,0,0,0.55);
+
 	}
 
 	.cell {
 		width: 20px;
 		height: 20px;
+		border: solid 1px #373737;;
 	}
 	.empty {
-		background-color: #181818;
+		background-color: #070707;
+	}
+
+	.bomb {
+		border-radius: 10px;
+		background-color: red;
+	}
+
+	.num {
+		background-color: #66CCFF;
+		border-radius: 10px;
 	}
 
 </style>
