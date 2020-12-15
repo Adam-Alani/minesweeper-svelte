@@ -3,7 +3,7 @@
 
 	`
 (1. Array of N*M Size -> Three Presets -> Small, Medium, Large)
-2. 3 Difficulties -> Easy , Medium , Hard -> N0 of Mines increases
+(2. 3 Difficulties -> Easy , Medium , Hard -> N0 of Mines increases)
 3. 4  states = { empty = 0 ; bomb = -1 ; number = 1-8 ; flag = 'F'  }
 3.5 Array structure => [ [ el , cellVisibility ] ]
 4. On left-click empty, -> remove all connected empties.
