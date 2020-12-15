@@ -106,8 +106,12 @@
 			for (let i = 0 ; i < 8 ; i++) {
 				let nr = row + dy[i], nc = col + dx[i];
 				if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[row].length ) {
+					if (board[nr][nc][0] === 0) {
+						showCell(nr,nc);
+					}
 					if (board[nr][nc][1] !== 'F') {
-						showCell(nr, nc);
+						board[nr][nc][1] = true;
+						chord(nr, nc);
 					}
 					if (board[nr][nc][1] === 'F' && board[nr][nc][0] !== -1) {
 						state = true;
