@@ -4,9 +4,10 @@
 	`
 1. Array of N*M Size -> Three Presets -> Small, Medium, Large
 2. 3 Difficulties -> Easy , Medium , Hard -> N0 of Mines increases
-3. 3  states = { empty = 0 ; bomb = 'B' ; number = 1-8 ; flag = 'F' }
-4. On right-click empty, -> remove all connected empties.
-4.5 On right-click bomb, -> lose
+3. 4  states = { empty = 0 ; bomb = -1 ; number = 1-8 ; flag = 'F'  }
+3.5 Array structure => [ [ el , cellVisibility ] ]
+4. On left-click empty, -> remove all connected empties.
+4.5 On left-click bomb, -> lose
 (5. -> Different colors for diff numbers) `
 
 
@@ -17,48 +18,65 @@
 		for (let i = 0 ; i < n ; ++i) {
 			board[i] = [];
 			for (let j = 0 ; j < m ; ++j) {
-				board[i][j] = 0;
+				board[i][j] = [0, false];
 			}
 		}
 		let bCount = 0;
 		while (bCount < b) {
-			let x =Math.floor(Math.random() * (board.length));
-			let y = Math.floor(Math.random() * (board[0].length));
-			if(board[x][y] === 0){
-				board[x][y] = -1;
+			let x =Math.floor(Math.random() * ((board.length)-1));
+			let y = Math.floor(Math.random() * ((board[0].length)-1));
+			if(board[x][y][0] === 0){
+				board[x][y][0] = -1;
 				bCount++;
 			}
 		}
 		return board;
 	}
-	board = generateBoard(board , [30,16],99);
+	board = generateBoard(board , [30,16], 99);
 	let cellsClicked = [];
-	function countNeighbours(board , i , j) {
-		let c = 0;
 
-		const prevRow = board[i - 1];
-		const currentRow = board[i]
-		const nextRow = board[i + 1];
-
-		[prevRow, currentRow, nextRow].forEach(row => {
-			if (row) {
-				if (row[j - 1] === -1) c++;
-				if (row[j] === -1) c++;
-				if (row[j + 1] === -1) c++;
+	function countNeighbours(board) {
+		const dx = [1, 1, 1, 0, 0, -1, -1, -1];
+		const dy = [1, 0, -1, 1, -1, 1, 0, -1];
+		for (let row = 0; row < board.length; row++) {
+			for (let col = 0; col < board[row].length; col++) {
+				if (board[row][col][0] === -1) {
+					for (let i = 0 ; i < 8 ; i++) {
+						let nr = row + dy[i], nc = col + dx[i];
+						if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[row].length ) {
+							if (board[nr][nc][0] !== -1) {
+								board[nr][nc][0] += 1;
+						}
+						}
+					}
+				}
 			}
-		})
-		return c;
+		}
+		return board
 	}
-	function update(board) {
-		return board.map((a, i) => {
-			return a.map((b, j) => {
-				return b === -1 ? b : countNeighbours(board, i, j)
-			})
-		})
-	}
-	board = update(board);
+	board = countNeighbours(board);
 	console.log(board)
 
+	function showCell(i , j) {
+		board[i][j][1] = true;
+		if (board[i][j][0] === 0) {
+			for (let k = -1; k <= 1 ; k++) {
+				for (let y = -1; y <= 1 ; y++) {
+					try {
+						if (board[i+k][j+y][0] !== -1 && board[i+k][j+y][1] === false) {
+							showCell(i+k , j+y)
+						}
+					}
+					catch(msg){}
+				}
+			}
+		}
+	}
+
+
+	function hideCell(i , j) {
+		board[i][j][1] = false;
+	}
 </script>
 
 <main>
@@ -73,12 +91,16 @@
 			{#each board as row, i}
 				<div class="row">
 					{#each row as cell, j}
-						{#if cell === 0}
-							<div class="cell empty "></div>
-						{:else if cell > 0}
-							<div class="cell num">{board[i][j]}</div>
+						{#if board[i][j][1] === true}
+							{#if board[i][j][0] === 0}
+								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell empty "></div>
+							{:else if board[i][j][0] > 0}
+								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell num">{board[i][j][0]}</div>
+							{:else}
+								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell bomb"></div>
+							{/if}
 						{:else}
-							<div class="cell bomb"></div>
+							<div on:click={()=> {showCell(i,j)}}   class="cell hidden "></div>
 						{/if}
 					{/each}
 				</div>
@@ -147,6 +169,10 @@
 	.num {
 		background-color: #66CCFF;
 		border-radius: 10px;
+	}
+
+	.hidden {
+		background-color: #cccccc;
 	}
 
 </style>
