@@ -1,1 +1,1 @@
-*Minesweeper built with svelte
+#Minesweeper built with svelte
