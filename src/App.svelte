@@ -1,5 +1,5 @@
 <script>
-	export let name;
+	import {onMount} from 'svelte';
 
 	`
 1. Array of N*M Size -> Three Presets -> Small, Medium, Large
@@ -14,6 +14,7 @@
 	/// ======== Setup ======== ///
 	let state = false;    //While true, game runs.
 	let board = [[]]
+
 	function generateBoard(board , [m, n] , b) {
 		for (let i = 0 ; i < n ; ++i) {
 			board[i] = [];
@@ -23,8 +24,8 @@
 		}
 		let bCount = 0;
 		while (bCount < b) {
-			let x =Math.floor(Math.random() * ((board.length)-1));
-			let y = Math.floor(Math.random() * ((board[0].length)-1));
+			let x =Math.floor(Math.random() * (board.length));
+			let y = Math.floor(Math.random() * (board[0].length));
 			if(board[x][y][0] === 0){
 				board[x][y][0] = -1;
 				bCount++;
@@ -32,7 +33,7 @@
 		}
 		return board;
 	}
-	board = generateBoard(board , [30,16], 99);
+	board = generateBoard(board , [30,16], 80);
 	let cellsClicked = [];
 
 	function countNeighbours(board) {
@@ -55,7 +56,9 @@
 		return board
 	}
 	board = countNeighbours(board);
-	console.log(board)
+
+	//----------------------------//
+	//--------- Commands ----------//
 
 	function showCell(i , j) {
 		if (board[i][j][0] === -1) {
@@ -76,7 +79,6 @@
 		}
 	}
 
-
 	function hideCell(i , j) {
 		board[i][j][1] = false;
 	}
@@ -84,15 +86,30 @@
 	function flagCell(i , j) {
 		board[i][j][1] = 'F';
 	}
+
+	//------------------------//
+
+	function newGame() {
+		state = false;
+		board = generateBoard(board , [30,16], 80);
+		board = countNeighbours(board);
+	}
 </script>
 
-<main>
-	<h1>{board}</h1>
+<svelte:window
+	on:keydown={(press) => {
+		if (press.key === 'Enter') {
+			newGame();
+		}
+	}}/>
 
+
+<main>
 	<h1 class="game-container">Shitty MineSweeper</h1>
 	<div class="game-container">
 		{#if state === true}
 			<h1 class="end">You Lost</h1>
+			<h3 class="end">Press Enter to try again</h3>
 		{/if}
 		<div>
 			{#each board as row, i}
@@ -114,6 +131,7 @@
 
 							{/if}
 						{:else}
+							<div class = "lost">
 							{#if board[i][j][0] === 0}
 								<div on:contextmenu|preventDefault class="cell empty "></div>
 							{:else if board[i][j][0] > 0}
@@ -121,6 +139,7 @@
 							{:else}
 								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell bomb"></div>
 							{/if}
+							</div>
 						{/if}
 					{/each}
 				</div>
@@ -131,7 +150,7 @@
 </main>
 
 <style>
-	
+
 	button{
 		height: 33px;
 		width: 100%;
@@ -179,6 +198,7 @@
 		display: flex; /* or inline-flex */
 		align-items: center;
 		justify-content: center;
+		color: white;
 	}
 
 	.hidden {
@@ -188,5 +208,30 @@
 	.flag {
 		background-color: greenyellow;
 	}
+	h1 {
+		color: #ffffff;
+		font-size: 4em;
+		font-weight: 600;
+	}
+	h3 {
+		color: #ffffff;
+	}
+	.end {
+		position: absolute;
+		z-index: 1000;
+		top: 25%;
+		left: 50%;
+		transform: translate(-50% , -25%);
+		-webkit-transform: translate(-50%, -25%);
 
+	}
+
+	.lost {
+		cursor: default;
+		opacity: 25%;
+	}
+
+	.cell:hover {
+		filter: brightness(150%);
+	}
 </style>
