@@ -8,6 +8,7 @@
 3.5 Array structure => [ [ el , cellVisibility ] ]
 4. On left-click empty, -> remove all connected empties.
 4.5 On left-click bomb, -> lose
+4.5.2 On left-click num , -> chording
 (5. -> Different colors for diff numbers) `
 
 
