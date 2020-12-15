@@ -98,19 +98,29 @@
 			{#each board as row, i}
 				<div class="row">
 					{#each row as cell, j}
-						{#if board[i][j][1] === true}
+						{#if state === false}
+							{#if board[i][j][1] === true}
+								{#if board[i][j][0] === 0}
+									<div on:contextmenu|preventDefault class="cell empty "></div>
+								{:else if board[i][j][0] > 0}
+									<div on:contextmenu|preventDefault class="cell num">{board[i][j][0]}</div>
+								{:else}
+									<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell bomb"></div>
+								{/if}
+							{:else if board[i][j][1] === 'F'}
+								<div on:click={()=> {showCell(i,j)}} on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell flag"></div>
+							{:else}
+								<div on:click={()=> {showCell(i,j)}} on:contextmenu|preventDefault="{() => {flagCell(i,j)}}" class="cell hidden "></div>
+
+							{/if}
+						{:else}
 							{#if board[i][j][0] === 0}
-								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell empty "></div>
+								<div on:contextmenu|preventDefault class="cell empty "></div>
 							{:else if board[i][j][0] > 0}
-								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell num">{board[i][j][0]}</div>
+								<div on:contextmenu|preventDefault class="cell num">{board[i][j][0]}</div>
 							{:else}
 								<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell bomb"></div>
 							{/if}
-						{:else if board[i][j][1] === 'F'}
-							<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell flag"></div>
-						{:else}
-							<div on:click={()=> {showCell(i,j)}} on:contextmenu|preventDefault="{() => {flagCell(i,j)}}" class="cell hidden "></div>
-
 						{/if}
 					{/each}
 				</div>
@@ -121,27 +131,7 @@
 </main>
 
 <style>
-	.footer{
-		width: 100%;
-		height: 75px;
-		background-color: #66CCFF;
-		margin: 0;
-		padding: 0;
-	}
-
-	.buttonsRow{
-		height: 50%;
-		width: 100%;
-		margin: 0;
-		padding: 0;
-	}
-
-	.button-wrapper{
-		display: inline-block;
-		margin: 0;
-		padding: 0;
-	}
-
+	
 	button{
 		height: 33px;
 		width: 100%;
@@ -159,30 +149,40 @@
 	.row {
 		cursor: pointer;
 		display: flex;
-
+		box-shadow: 2px 0px 25px 0px rgba(0,0,0,0.55);
+		-webkit-box-shadow: 2px 0px 25px 0px rgba(0,0,0,0.55);
+		-moz-box-shadow: 2px 0px 25px 0px rgba(0,0,0,0.55);
 	}
 
 	.cell {
 		width: 20px;
 		height: 20px;
-		border: solid 1px #373737;;
+		border: solid 1px #4c4c4c;;
+		border-radius: 27%;
 	}
 	.empty {
-		background-color: #070707;
+		background-color: #373737;
+		cursor: default;
 	}
 
 	.bomb {
-		border-radius: 10px;
+		border-radius: 100%;
 		background-color: red;
+
 	}
 
 	.num {
+		font-size: 11px;
 		background-color: #66CCFF;
-		border-radius: 10px;
+		border-radius: 100%;
+		cursor: default;
+		display: flex; /* or inline-flex */
+		align-items: center;
+		justify-content: center;
 	}
 
 	.hidden {
-		background-color: #cccccc;
+		background-color: #181818;
 	}
 
 	.flag {
