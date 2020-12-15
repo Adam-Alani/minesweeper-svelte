@@ -403,9 +403,9 @@ var app = (function () {
     			t1 = space();
     			h3 = element("h3");
     			h3.textContent = "Press Enter to try again";
-    			attr_dev(h1, "class", "end svelte-3jv1ug");
+    			attr_dev(h1, "class", "end svelte-1bgli4w");
     			add_location(h1, file, 147, 3, 3608);
-    			attr_dev(h3, "class", "end svelte-3jv1ug");
+    			attr_dev(h3, "class", "end svelte-1bgli4w");
     			add_location(h3, file, 148, 3, 3642);
     		},
     		m: function mount(target, anchor) {
@@ -448,7 +448,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if_block.c();
-    			attr_dev(div, "class", "lost svelte-3jv1ug");
+    			attr_dev(div, "class", "lost svelte-1bgli4w");
     			add_location(div, file, 171, 7, 4567);
     		},
     		m: function mount(target, anchor) {
@@ -550,7 +550,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "cell bomb svelte-3jv1ug");
+    			attr_dev(div, "class", "cell bomb svelte-1bgli4w");
     			add_location(div, file, 177, 8, 4841);
     		},
     		m: function mount(target, anchor) {
@@ -594,7 +594,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			t = text(t_value);
-    			attr_dev(div, "class", "cell num svelte-3jv1ug");
+    			attr_dev(div, "class", "cell num svelte-1bgli4w");
     			add_location(div, file, 175, 8, 4741);
     		},
     		m: function mount(target, anchor) {
@@ -636,7 +636,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "cell empty  svelte-3jv1ug");
+    			attr_dev(div, "class", "cell empty  svelte-1bgli4w");
     			add_location(div, file, 173, 8, 4632);
     		},
     		m: function mount(target, anchor) {
@@ -683,7 +683,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "cell hidden  svelte-3jv1ug");
+    			attr_dev(div, "class", "cell hidden  svelte-1bgli4w");
     			add_location(div, file, 166, 8, 4405);
     		},
     		m: function mount(target, anchor) {
@@ -732,7 +732,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "cell flag svelte-3jv1ug");
+    			attr_dev(div, "class", "cell flag svelte-1bgli4w");
     			add_location(div, file, 164, 8, 4294);
     		},
     		m: function mount(target, anchor) {
@@ -829,7 +829,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "cell bomb svelte-3jv1ug");
+    			attr_dev(div, "class", "cell bomb svelte-1bgli4w");
     			add_location(div, file, 161, 9, 4142);
     		},
     		m: function mount(target, anchor) {
@@ -877,7 +877,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			t = text(t_value);
-    			attr_dev(div, "class", "cell num svelte-3jv1ug");
+    			attr_dev(div, "class", "cell num svelte-1bgli4w");
     			add_location(div, file, 159, 9, 4010);
     		},
     		m: function mount(target, anchor) {
@@ -924,7 +924,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", "cell empty  svelte-3jv1ug");
+    			attr_dev(div, "class", "cell empty  svelte-1bgli4w");
     			add_location(div, file, 157, 9, 3899);
     		},
     		m: function mount(target, anchor) {
@@ -1026,7 +1026,7 @@ var app = (function () {
     			}
 
     			t = space();
-    			attr_dev(div, "class", "row svelte-3jv1ug");
+    			attr_dev(div, "class", "row svelte-1bgli4w");
     			add_location(div, file, 152, 4, 3739);
     		},
     		m: function mount(target, anchor) {
@@ -1113,10 +1113,10 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(h1, "class", "game-container svelte-3jv1ug");
+    			attr_dev(h1, "class", "game-container svelte-1bgli4w");
     			add_location(h1, file, 144, 1, 3498);
     			add_location(div0, file, 150, 2, 3700);
-    			attr_dev(div1, "class", "game-container svelte-3jv1ug");
+    			attr_dev(div1, "class", "game-container svelte-1bgli4w");
     			add_location(div1, file, 145, 1, 3551);
     			add_location(main, file, 143, 0, 3489);
     		},

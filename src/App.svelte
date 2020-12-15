@@ -212,8 +212,8 @@
 	}
 
 	.cell {
-		width: 20px;
-		height: 20px;
+		width: 30px;
+		height: 30px;
 		border: solid 1px #4c4c4c;;
 		border-radius: 27%;
 	}
@@ -229,7 +229,7 @@
 	}
 
 	.num {
-		font-size: 11px;
+		font-size: 15px;
 		background-color: #66CCFF;
 		border-radius: 100%;
 		cursor: default;
