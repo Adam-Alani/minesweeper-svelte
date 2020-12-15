@@ -33,7 +33,7 @@
 		}
 		return board;
 	}
-	board = generateBoard(board , [30,16], 80);
+	board = generateBoard(board , [30,16], 60);
 	let cellsClicked = [];
 
 	function countNeighbours(board) {
@@ -87,6 +87,36 @@
 		board[i][j][1] = 'F';
 	}
 
+	function chord(row , col) {
+		const dx = [1, 1, 1, 0, 0, -1, -1, -1];
+		const dy = [1, 0, -1, 1, -1, 1, 0, -1];
+		let fcount = 0;
+		if (board[row][col][0] >= 1) {
+			for (let i = 0 ; i < 8 ; i++) {
+				let nr = row + dy[i], nc = col + dx[i];
+				if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[row].length ) {
+					if (board[nr][nc][1] === 'F' ) {
+						fcount += 1;
+					}
+				}
+			}
+		}
+		if (fcount === board[row][col][0]) {
+			for (let i = 0 ; i < 8 ; i++) {
+				let nr = row + dy[i], nc = col + dx[i];
+				if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[row].length ) {
+					if (board[nr][nc][1] !== 'F') {
+						board[nr][nc][1] = true;
+					}
+					if (board[nr][nc][1] === 'F' && board[nr][nc][0] !== -1) {
+						state = true;
+					}
+				}
+			}
+		}
+		return board;
+	}
+
 	//------------------------//
 
 	function newGame() {
@@ -94,6 +124,8 @@
 		board = generateBoard(board , [30,16], 80);
 		board = countNeighbours(board);
 	}
+
+
 </script>
 
 <svelte:window
@@ -120,7 +152,7 @@
 								{#if board[i][j][0] === 0}
 									<div on:contextmenu|preventDefault class="cell empty "></div>
 								{:else if board[i][j][0] > 0}
-									<div on:contextmenu|preventDefault class="cell num">{board[i][j][0]}</div>
+									<div on:contextmenu|preventDefault on:click={()=> {chord(i,j)}}  class="cell num">{board[i][j][0]}</div>
 								{:else}
 									<div on:contextmenu|preventDefault="{() => {hideCell(i,j)}}" class="cell bomb"></div>
 								{/if}
