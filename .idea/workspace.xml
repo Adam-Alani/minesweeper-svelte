@@ -50,6 +50,7 @@
       <workItem from="1608022856843" duration="10640000" />
       <workItem from="1608034171282" duration="2269000" />
       <workItem from="1608042466393" duration="3198000" />
+      <workItem from="1608130261787" duration="1651000" />
     </task>
     <servers />
   </component>
@@ -57,6 +58,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="777" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608131636684">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="777" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1608131636684" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1608035405417">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

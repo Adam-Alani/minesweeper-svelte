@@ -15,6 +15,8 @@
 	/// ======== Setup ======== ///
 	let state = false;    //While true, game runs.
 	let board = [[]]
+	let mines = 80;
+	let bCount = mines;
 
 	function generateBoard(board , [m, n] , b) {
 		for (let i = 0 ; i < n ; ++i) {
@@ -34,7 +36,7 @@
 		}
 		return board;
 	}
-	board = generateBoard(board , [30,16], 60);
+	board = generateBoard(board , [30,16], mines);
 	let cellsClicked = [];
 
 	function countNeighbours(board) {
@@ -82,10 +84,13 @@
 
 	function hideCell(i , j) {
 		board[i][j][1] = false;
+		bCount += 1;
+
 	}
 
 	function flagCell(i , j) {
 		board[i][j][1] = 'F';
+		bCount -= 1;
 	}
 
 	function chord(row , col) {
@@ -111,7 +116,7 @@
 					}
 					if (board[nr][nc][1] !== 'F') {
 						board[nr][nc][1] = true;
-						chord(nr, nc);
+						showCell(nr, nc);
 					}
 					if (board[nr][nc][1] === 'F' && board[nr][nc][0] !== -1) {
 						state = true;
@@ -128,8 +133,22 @@
 		state = false;
 		board = generateBoard(board , [30,16], 80);
 		board = countNeighbours(board);
+		bCount = 80;
 	}
 
+	function checkWin() {
+		for (let i = 0; i < board.length ; i++) {
+			for (let j = 0 ; j < board[i].length ; j++) {
+				if (board[i][j][1] === 'F' && board[i][j][0] !== -1) {
+					return false
+				}
+				if (board[i][j][1] === false) {
+					return false
+				}
+			}
+		}
+		return true
+	}
 
 </script>
 
@@ -143,10 +162,14 @@
 
 <main>
 	<h1 class="game-container">Shitty MineSweeper</h1>
+	<h3 class="game-container">Flags left: {bCount}</h3>
 	<div class="game-container">
 		{#if state === true}
 			<h1 class="end">You Lost</h1>
 			<h3 class="end">Press Enter to try again</h3>
+		{:else if bCount === 0 && checkWin()}
+			<h1 class="end">You Win!</h1>
+			<h3 class="end">Press Enter to play again</h3>
 		{/if}
 		<div>
 			{#each board as row, i}
@@ -251,10 +274,9 @@
 		font-size: 4em;
 		font-weight: 600;
 	}
-	h3 {
-		color: #ffffff;
-	}
+
 	.end {
+		color: white;
 		position: absolute;
 		z-index: 1000;
 		top: 25%;
