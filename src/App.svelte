@@ -253,7 +253,7 @@
 
 	.num {
 		font-size: 15px;
-		background-color: #66CCFF;
+		background-color: #014b69;
 		border-radius: 100%;
 		cursor: default;
 		display: flex; /* or inline-flex */
