@@ -13,28 +13,29 @@ export function randomBegin(board) {
 
 export function countUnmarkedNeighbours(i,j , board) {
     let unmarked = [];
-    let flagged = [];
+    let unflagged = [];
     const dx = [1, 1, 1, 0, 0, -1, -1, -1];
     const dy = [1, 0, -1, 1, -1, 1, 0, -1];
     for (let x = 0 ; x < 8 ; x++) {
         let nr = i + dy[x], nc = j + dx[x];
         if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[i].length ) {
-            if (board[nr][nc][1] === false) {
+            if (board[nr][nc][1] === false || board[nr][nc][1] === "F" ) {
                 unmarked.push([nr,nc]);
             }
-            if (board[nr][nc][1] === "F") {
-                flagged.push([nr,nc])
+            if (board[nr][nc][1] === false) {
+                unflagged.push([nr,nc])
             }
         }
     }
-    return [unmarked, flagged];
+    return [unmarked, unflagged];
 }
 
 export function getOpenCells(board) {
     let possCells = [];
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
-            if (board[i][j][1] === false || (board[i][j][0] === 0 && board[i][j][1] === true) ) {
+            let [unmarked, unflagged] =  countUnmarkedNeighbours(i , j , board)
+            if (board[i][j][1] === false || (board[i][j][0] === 0 && board[i][j][1] === true) || unflagged.length === 0) {
                 continue
             }
             possCells.push([i,j]);
@@ -47,21 +48,10 @@ export function bombEqualNum(possCells, board) {
     let markedCells = []
     for (let i = 0; i < possCells.length; i++) {
         let [unmarked, flagged] = countUnmarkedNeighbours(possCells[i][0],possCells[i][1], board)
-        // console.log("Coord: " + possCells[i])
-        // console.log("Unmarked: " + unmarked);
-        // console.log("Flagged: " + flagged );
-        if (unmarked.length === 1 &&  board[possCells[i][0]][possCells[i][1]][0] === 1 ) {
+        if (unmarked.length === board[possCells[i][0]][possCells[i][1]][0] ) {
             markedCells.push(unmarked);
         }
-        else if (unmarked.length === 2 && board[possCells[i][0]][possCells[i][1]][0] === 2 ) {
-            markedCells.push(unmarked);
-        }
-        else if (unmarked.length === 3 && board[possCells[i][0]][possCells[i][1]][0] === 3 ) {
-            markedCells.push(unmarked);
-        }
-        else if (unmarked.length === 4 && board[possCells[i][0]][possCells[i][1]][0] === 4 ) {
-            markedCells.push(unmarked);
-        }
+
     }
     return markedCells;
 }

@@ -120,35 +120,32 @@
 	showCell(move[0], move[1])
 	function autoSolve() {
 		let delay = 0;
-
-		let possCells = getOpenCells(board);
-		let marked = bombEqualNum(possCells, board);
-		if (marked.length > 0) {
-			// console.log("Marked is " + marked[0][0]);
-			for (let i = 0; i < marked.length; i++) {
-				delay++
-				setTimeout(function() {
-
-						board[marked[i][0][0]][marked[i][0][1]][1] = 'F'
-					}, 50*i)
-				}
-			delay *= 40;
-			}
-		for (let i = 0; i < possCells.length; i++) {
-			setTimeout(function() {
-				chord(possCells[i][0],possCells[i][1])
-			}, 50*i+delay)
-			delay++
-		}
-		delay *= 2;
 		setTimeout(()=> {
-			//let possCells = getOpenCells(board);
-			//console.table(possCells)
-		if (state) {
-			return;
-		}
-		console.log(delay);
-		}, delay)
+			delay = 0;
+			let possCells = getOpenCells(board);
+			let marked = bombEqualNum(possCells, board);
+				for (let i = 0; i < marked.length; i++) {
+					for (let j = 0 ; j < marked[i].length; j++) {
+						console.log(marked[i][j])
+						setTimeout(function() {
+							board[marked[i][j][0]][marked[i][j][1]][1] = 'F'
+						}, i)
+					}
+				}
+				delay *= 40;
+
+			for (let i = 0; i < possCells.length; i++) {
+				setTimeout(function() {
+					chord(possCells[i][0],possCells[i][1])
+				}, i)
+				delay++
+			}
+			delay = 0;
+			autoSolve();
+		},10)
+
+
+
 
 	}
 
@@ -166,9 +163,8 @@
 <main>
 	<h1 class="game-container">Shitty MineSweeper</h1>
 	<h3 class="game-container">Flags left: {bCount}</h3>
-	<button on:click={autoSolve}>Solve</button>
-	<div class="game-container">
 
+	<div class="game-container">
 		{#if state === true}
 			<h1 class="end">You Lost</h1>
 			<h3 class="end">Press Enter to try again</h3>
@@ -212,6 +208,17 @@
 			{/each}
 		</div>
 	</div>
+	<div class="button-container">
+		<div>
+			<button class="btn" on:click={autoSolve}>Solve</button>
+		</div>
+		<div>
+			<button class="btn" on:click={autoSolve}>Play Again</button>
+		</div>
+		<div>
+			<button class="btn" on:click={autoSolve}>Next Step</button>
+		</div>
+	</div>
 
 </main>
 
@@ -221,6 +228,37 @@
 		height: 33px;
 		width: 100%;
 		margin: 2px;
+	}
+
+	.btn {
+		padding: 15px 12px;
+		height: 60px;
+		width: 150px;
+		outline: none;
+		text-decoration: none;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		text-transform: uppercase;
+		background-color: #1d1d1d;
+		border-radius: 10px;
+		color: #ffffff;
+		font-weight: 600;
+
+		font-size: 20px;
+		font-family: inherit;
+		z-index: 0;
+		overflow: hidden;
+		transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+		border: 1px solid rgba(255, 255, 255, 0.6);
+	}
+
+	.button-container {
+		padding-top: 5%;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 
