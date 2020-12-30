@@ -1,4 +1,4 @@
 # 💣 minesweeper-svelte
-Minesweeper game written with Svelte in a day
+Minesweeper game and AI written with Svelte in a ~~day~~ week
 ## Play game here: https://shit-mine.glitch.me/
 ![Screenshot](mine.png)
