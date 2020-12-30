@@ -54,8 +54,10 @@
 	}
 
 	function flagCell(i , j) {
-		board[i][j][1] = 'F';
-		bCount -= 1;
+		if (board[i][j][1] !== 'F') {
+			board[i][j][1] = 'F';
+			bCount -= 1;
+		}
 	}
 
 	function chord(row , col) {
@@ -102,6 +104,12 @@
 		move = [0,0]
 	}
 
+	function endGame() {
+		state = true;
+		autoSolve(true, false);
+		newGame();
+	}
+
 	function checkWin() {
 		for (let i = 0; i < board.length ; i++) {
 			for (let j = 0 ; j < board[i].length ; j++) {
@@ -118,35 +126,35 @@
 
 	move = randomBegin(board);
 	showCell(move[0], move[1])
-	function autoSolve() {
-		let delay = 0;
-		setTimeout(()=> {
-			delay = 0;
-			let possCells = getOpenCells(board);
-			let marked = bombEqualNum(possCells, board);
+	function autoSolve(oneMove, toggle) {
+		if (toggle) {
+			let delay = 0;
+			setTimeout(()=> {
+				delay = 0;
+				let possCells = getOpenCells(board);
+				let marked = bombEqualNum(possCells, board);
 				for (let i = 0; i < marked.length; i++) {
 					for (let j = 0 ; j < marked[i].length; j++) {
 						console.log(marked[i][j])
 						setTimeout(function() {
-							board[marked[i][j][0]][marked[i][j][1]][1] = 'F'
+							flagCell(marked[i][j][0],marked[i][j][1]);
 						}, i)
 					}
 				}
 				delay *= 40;
 
-			for (let i = 0; i < possCells.length; i++) {
-				setTimeout(function() {
-					chord(possCells[i][0],possCells[i][1])
-				}, i)
-				delay++
-			}
-			delay = 0;
-			autoSolve();
-		},10)
-
-
-
-
+				for (let i = 0; i < possCells.length; i++) {
+					setTimeout(function() {
+						chord(possCells[i][0],possCells[i][1])
+					}, i)
+					delay++
+				}
+				delay = 0;
+				if (!oneMove || state) {
+					autoSolve(false, true);
+				}
+			},10)
+		}
 	}
 
 
@@ -210,13 +218,13 @@
 	</div>
 	<div class="button-container">
 		<div>
-			<button class="btn" on:click={autoSolve}>Solve</button>
+			<button class="btn" on:click={()=> {autoSolve(false, true)}}>Solve</button>
 		</div>
 		<div>
-			<button class="btn" on:click={autoSolve}>Play Again</button>
+			<button class="btn" on:click={endGame}>Play Again</button>
 		</div>
 		<div>
-			<button class="btn" on:click={autoSolve}>Next Step</button>
+			<button class="btn" on:click={()=> {autoSolve(true, true)}}>Next Layer</button>
 		</div>
 	</div>
 
@@ -326,6 +334,8 @@
 		left: 50%;
 		transform: translate(-50% , -25%);
 		-webkit-transform: translate(-50%, -25%);
+		text-shadow: 0px 0px 14px rgba(0,0,0,0.59);
+
 
 	}
 
