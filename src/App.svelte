@@ -1,5 +1,7 @@
 <script>
 	import {onMount} from 'svelte';
+	import {generateBoard, countNeighbours} from "./board";
+	import {randomBegin, getOpenCells, bombEqualNum,} from "./solver";
 
 	`
 (1. Array of N*M Size -> Three Presets -> Small, Medium, Large)
@@ -13,51 +15,14 @@
 
 
 	/// ======== Setup ======== ///
-	let state = false;    //While true, game runs.
+	export let state = false;    //While true, game runs.
 	let board = [[]]
 	let mines = 80;
 	let bCount = mines;
-
-	function generateBoard(board , [m, n] , b) {
-		for (let i = 0 ; i < n ; ++i) {
-			board[i] = [];
-			for (let j = 0 ; j < m ; ++j) {
-				board[i][j] = [0, false];
-			}
-		}
-		let bCount = 0;
-		while (bCount < b) {
-			let x =Math.floor(Math.random() * (board.length));
-			let y = Math.floor(Math.random() * (board[0].length));
-			if(board[x][y][0] === 0){
-				board[x][y][0] = -1;
-				bCount++;
-			}
-		}
-		return board;
-	}
-	board = generateBoard(board , [30,16], mines);
 	let cellsClicked = [];
+	let move = [0,0]
 
-	function countNeighbours(board) {
-		const dx = [1, 1, 1, 0, 0, -1, -1, -1];
-		const dy = [1, 0, -1, 1, -1, 1, 0, -1];
-		for (let row = 0; row < board.length; row++) {
-			for (let col = 0; col < board[row].length; col++) {
-				if (board[row][col][0] === -1) {
-					for (let i = 0 ; i < 8 ; i++) {
-						let nr = row + dy[i], nc = col + dx[i];
-						if (nr >= 0 && nr < board.length && nc >= 0 && nc < board[row].length ) {
-							if (board[nr][nc][0] !== -1) {
-								board[nr][nc][0] += 1;
-						}
-						}
-					}
-				}
-			}
-		}
-		return board
-	}
+	board = generateBoard(board , [30,16], mines);
 	board = countNeighbours(board);
 
 	//----------------------------//
@@ -134,6 +99,7 @@
 		board = generateBoard(board , [30,16], 80);
 		board = countNeighbours(board);
 		bCount = 80;
+		move = [0,0]
 	}
 
 	function checkWin() {
@@ -150,6 +116,43 @@
 		return true
 	}
 
+	move = randomBegin(board);
+	showCell(move[0], move[1])
+	function autoSolve() {
+		let delay = 0;
+
+		let possCells = getOpenCells(board);
+		let marked = bombEqualNum(possCells, board);
+		if (marked.length > 0) {
+			// console.log("Marked is " + marked[0][0]);
+			for (let i = 0; i < marked.length; i++) {
+				delay++
+				setTimeout(function() {
+
+						board[marked[i][0][0]][marked[i][0][1]][1] = 'F'
+					}, 50*i)
+				}
+			delay *= 40;
+			}
+		for (let i = 0; i < possCells.length; i++) {
+			setTimeout(function() {
+				chord(possCells[i][0],possCells[i][1])
+			}, 50*i+delay)
+			delay++
+		}
+		delay *= 2;
+		setTimeout(()=> {
+			//let possCells = getOpenCells(board);
+			//console.table(possCells)
+		if (state) {
+			return;
+		}
+		console.log(delay);
+		}, delay)
+
+	}
+
+
 </script>
 
 <svelte:window
@@ -163,7 +166,9 @@
 <main>
 	<h1 class="game-container">Shitty MineSweeper</h1>
 	<h3 class="game-container">Flags left: {bCount}</h3>
+	<button on:click={autoSolve}>Solve</button>
 	<div class="game-container">
+
 		{#if state === true}
 			<h1 class="end">You Lost</h1>
 			<h3 class="end">Press Enter to try again</h3>
@@ -176,7 +181,7 @@
 				<div class="row">
 					{#each row as cell, j}
 						{#if state === false}
-							{#if board[i][j][1] === true}
+							{#if board[i][j][1] === true }
 								{#if board[i][j][0] === 0}
 									<div on:contextmenu|preventDefault class="cell empty "></div>
 								{:else if board[i][j][0] > 0}
