@@ -1,7 +1,7 @@
 <script>
 	import {onMount} from 'svelte';
 	import {generateBoard, countNeighbours} from "./board";
-	import {randomBegin, getOpenCells, bombEqualNum, randomGuess} from "./solver";
+	import {randomBegin, getOpenCells, bombEqualNum, randomGuess, oneDoubleTwoOne, oneTwoOne} from "./solver";
 
 	`
 (1. Array of N*M Size -> Three Presets -> Small, Medium, Large)
@@ -144,12 +144,42 @@
 					}
 					delay *= 40;
 				}
-				else if (marked.length === -1) {
-					setTimeout(function() {
-						possCells = getOpenCells(board);
-						let randomCell = randomGuess(possCells, board);
-						flagCell(randomCell[0], randomCell[1])
-					}, 1500)
+				else if (marked.length === 0) {
+					try {
+						let [toFlag, toOpen] = oneDoubleTwoOne(getOpenCells(board), board);
+						if (toFlag.length > 0) {
+							console.table(toFlag);
+							for (let i = 0; i < toFlag.length; i++) {
+								setTimeout(function () {
+									flagCell(toFlag[i][0], toFlag[i][1]);
+								}, i)
+							}
+						}
+						if (toOpen.length > 0) {
+							for (let i = 0; i < toOpen.length; i++) {
+								setTimeout(function () {
+									showCell(toOpen[i][0], toOpen[i][1]);
+								}, i)
+							}
+						}
+					}
+					catch(msg){}
+					let [toFlag, toOpen] = oneTwoOne(getOpenCells(board), board);
+					if (toFlag.length > 0) {
+						console.table(toFlag);
+						for (let i = 0; i < toFlag.length; i++) {
+							setTimeout(function () {
+								flagCell(toFlag[i][0], toFlag[i][1]);
+							}, i)
+						}
+					}
+					if (toOpen.length > 0) {
+						for (let i = 0; i < toOpen.length; i++) {
+							setTimeout(function () {
+								showCell(toOpen[i][0], toOpen[i][1]);
+							}, i)
+						}
+					}
 
 				}
 				for (let i = 0; i < possCells.length; i++) {
@@ -158,7 +188,7 @@
 					}, i)
 					delay++
 				}
-				//console.log(possCells);
+
 				delay = 0;
 				if (!oneMove || state) {
 					autoSolve(false, true);
