@@ -1,7 +1,7 @@
 <script>
 	import {onMount} from 'svelte';
 	import {generateBoard, countNeighbours} from "./board";
-	import {randomBegin, getOpenCells, bombEqualNum,} from "./solver";
+	import {randomBegin, getOpenCells, bombEqualNum, randomGuess} from "./solver";
 
 	`
 (1. Array of N*M Size -> Three Presets -> Small, Medium, Large)
@@ -133,22 +133,32 @@
 				delay = 0;
 				let possCells = getOpenCells(board);
 				let marked = bombEqualNum(possCells, board);
-				for (let i = 0; i < marked.length; i++) {
-					for (let j = 0 ; j < marked[i].length; j++) {
-						console.log(marked[i][j])
-						setTimeout(function() {
-							flagCell(marked[i][j][0],marked[i][j][1]);
-						}, i)
+				if (marked.length > 0) {
+					for (let i = 0; i < marked.length; i++) {
+						for (let j = 0 ; j < marked[i].length; j++) {
+							//console.log(marked[i][j])
+							setTimeout(function() {
+								flagCell(marked[i][j][0],marked[i][j][1]);
+							}, i)
+						}
 					}
+					delay *= 40;
 				}
-				delay *= 40;
+				else if (marked.length === -1) {
+					setTimeout(function() {
+						possCells = getOpenCells(board);
+						let randomCell = randomGuess(possCells, board);
+						flagCell(randomCell[0], randomCell[1])
+					}, 1500)
 
+				}
 				for (let i = 0; i < possCells.length; i++) {
 					setTimeout(function() {
 						chord(possCells[i][0],possCells[i][1])
 					}, i)
 					delay++
 				}
+				//console.log(possCells);
 				delay = 0;
 				if (!oneMove || state) {
 					autoSolve(false, true);

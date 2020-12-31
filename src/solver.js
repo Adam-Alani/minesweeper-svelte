@@ -56,6 +56,19 @@ export function bombEqualNum(possCells, board) {
     return markedCells;
 }
 
+`
+Calculate probability of all arrangements, and check which one has best prob, pick that arrangement.
+`
+
+export function randomGuess(possCells,board) {
+    possCells.sort((a,b) => (board[a[0]][a[1]][0] - countUnmarkedNeighbours(a[0],a[1],board)[0].length) - (board[b[0]][b[1]][0]-countUnmarkedNeighbours(b[0],b[1], board)[0].length))
+    const cell = possCells[0];
+    let [neighbours, _] = countUnmarkedNeighbours(cell[0],cell[1], board )
+    let guess = neighbours[Math.floor(Math.random() * neighbours.length)];
+    return guess;
+}
+
+
 
 
 
